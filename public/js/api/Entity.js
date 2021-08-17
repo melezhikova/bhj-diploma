@@ -12,10 +12,7 @@ class Entity {
     createRequest({
       data, 
       method: 'GET',
-      callback: (err, response) => {
-        console.log(err);
-        console.log(response);
-      }
+      callback
     })
   }
 
@@ -28,10 +25,7 @@ class Entity {
     createRequest({
       data,
       method: 'PUT',
-      callback: (err, response) => {
-        console.log(err);
-        console.log(response);
-      }
+      callback
     })
   }
 
@@ -40,14 +34,10 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
   static remove(data, callback ) {
-    method = 'DELETE';
     createRequest({
       data,
       method: 'DELETE',
-      callback: (err, response) => {
-        console.log(err);
-        console.log(response);
-      }
+      callback
     })
   }
 }

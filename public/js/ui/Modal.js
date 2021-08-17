@@ -29,7 +29,7 @@ class Modal {
    * */
   registerEvents() {
     const modal = this.element.querySelector('[data-dismiss="modal"]');
-    modal.addEventListener('click', onclose);
+    modal.addEventListener('click', this.onclose);
   }
 
   /**

@@ -11,10 +11,7 @@ class Account extends Entity {
     createRequest({
       id,
       method: 'GET',
-      callback: (err, response) => {
-        console.log(err);
-        console.log(response);
-      }
+      callback
     })
   }
 }
