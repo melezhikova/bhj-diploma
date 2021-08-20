@@ -6,7 +6,14 @@ const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     if (options.method === 'GET') {
-        let urlGet = options.url + JSON.stringify(options.data);
+        const currentData = options.data;
+        let result = '';
+        for (let item in currentData) {
+            let value = currentData[item];
+            result += `${item}=${value}&`
+        }
+        const dataUrl = result.substring(0, result.length - 1);
+        let urlGet = options.url + '?' + dataUrl;
         try {
             xhr.open('GET', urlGet);
             xhr.send();
@@ -21,7 +28,7 @@ const createRequest = (options = {}) => {
         }
     } else {
         try {
-            let formData = new FormData(options.data);
+            let formData = new FormData();
             for (let option in options) {
                 let value = options[option];
                 formData.append(option, value);
