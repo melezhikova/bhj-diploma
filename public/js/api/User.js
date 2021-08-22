@@ -33,15 +33,16 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
+    console.log(callback);
     createRequest({
       url: this.URL + '/current',
       method: 'GET',
       responseType: 'json',
       data: this.current(),
       callback(err, response) {
-        if (response.success === true) {
+        if (response && response.success === true) {
           this.setCurrent(response.user);
-        } else if (response.success === false) {
+        } else if (response && response.success === false) {
           this.unsetCurrent(response.user);
         } 
         callback(err, response);

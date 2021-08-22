@@ -12,12 +12,11 @@ class TransactionsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-    this.element = () => {
-      if (!element) {
-        throw new Error ("Ошибка!");
-      }
-      return element;
-    } 
+    if (!element) {
+      throw new Error ("Ошибка!");
+    } else {
+      this.element = element;
+    }
 
     this.registerEvents();
   }

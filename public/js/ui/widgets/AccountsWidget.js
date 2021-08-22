@@ -14,12 +14,11 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-    this.element = () => {
-      if (!element) {
-        throw new Error ("Ошибка!");
-      }
-      return element;
-    } 
+    if (!element) {
+      throw new Error ("Ошибка!");
+    } else {
+      this.element = element;
+    }
 
     this.registerEvents();
     this.update();
@@ -58,7 +57,7 @@ class AccountsWidget {
    * */
   update() {
     let current = User.current();
-    if (current.name) {
+    if (current) {
       let accounts = Account.list();
       if (accounts) {
         this.Widget.clear();
