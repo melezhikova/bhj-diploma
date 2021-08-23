@@ -4,6 +4,8 @@
  * Имеет свойство URL со значением '/account'
  * */
 class Account extends Entity {
+
+  static UPL = '/account';
   /**
    * Получает информацию о счёте
    * */

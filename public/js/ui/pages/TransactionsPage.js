@@ -126,7 +126,7 @@ class TransactionsPage {
    * Устанавливает заголовок в элемент .content-title
    * */
   renderTitle(name){
-    const title = this.element.querySelector('.content-title');
+    const title = document.querySelector('.content-title');
     title.innerText = name;
   }
 

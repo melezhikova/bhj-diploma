@@ -20,7 +20,7 @@ class CreateTransactionForm extends AsyncForm {
    * Обновляет в форме всплывающего окна выпадающий список
    * */
   renderAccountsList() {
-    Account.list();
+  //  Account.list();
   }
 
   /**

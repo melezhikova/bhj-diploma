@@ -10,6 +10,7 @@ class LoginForm extends AsyncForm {
    * закрывает окно, в котором находится форма
    * */
   onSubmit(data) {
+    console.log(data);
     User.login(data, () => {return response.success});
     if (response.success === true) {
       const form = App.getForm('login');
