@@ -30,9 +30,9 @@ class CreateTransactionForm extends AsyncForm {
    * в котором находится форма
    * */
   onSubmit(data) {
-    Transaction.create(data, callback);
-    if (response.success === true) {
-      App.update();
+//    Transaction.create(data, callback);
+  //  if (response.success === true) {
+ //     App.update();
 //если доход
       // const form = App.getForm('createIncome');
       // form.reset();
@@ -45,6 +45,6 @@ class CreateTransactionForm extends AsyncForm {
 //если расход
     // const modal = App.getModal('newExpense');
     // modal.close();
-    }
+ //   }
   }
 }

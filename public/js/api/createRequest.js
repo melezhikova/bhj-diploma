@@ -3,7 +3,6 @@
  * на сервер.
  * */
 const createRequest = (options = {}) => {
-    console.log(options);
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     if (options.method === 'GET') {
@@ -22,7 +21,7 @@ const createRequest = (options = {}) => {
                 if (xhr.readyState === xhr.DONE && xhr.status === 200) {
                     console.log(xhr.response);
                     console.log(options.callback);
-                    options.callback(xhr.err, xhr.response);
+                    options.callback = f => f;
                 }
             })
         } catch (e) {
@@ -30,9 +29,10 @@ const createRequest = (options = {}) => {
         }
     } else {
         try {
+            console.log(options);
             let formData = new FormData();
-            for (let option in options) {
-                let value = options[option];
+            for (let option in options.data) {
+                let value = options.data[option];
                 formData.append(option, value);
             }
             xhr.open(options.method, options.url);
@@ -40,7 +40,8 @@ const createRequest = (options = {}) => {
             xhr.addEventListener('readystatechange', function () {
                 if (xhr.readyState === xhr.DONE && xhr.status === 200) {
                     console.log(xhr.response);
-                    options.callback(xhr.err, xhr.response);
+                    console.log(options.callback);
+                    options.callback = f => f;
                 }
             })
         } catch (e) {

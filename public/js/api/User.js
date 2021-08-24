@@ -12,6 +12,7 @@ class User {
    * */
   static setCurrent(user) {
     localStorage.setItem('user', JSON.stringify(user));
+    console.log(localStorage.getItem('user'));
   }
 
   /**
@@ -27,6 +28,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
+    console.log(localStorage.getItem('user'));
     return JSON.parse(localStorage.getItem('user'));
   }
 
@@ -35,7 +37,6 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-    console.log(callback);
     createRequest({
       url: this.URL + '/current',
       method: 'GET',
@@ -91,6 +92,7 @@ class User {
         if (response && response.user) {
           this.setCurrent(response.user);
         }
+        console.log(response);
         callback(err, response);
       }
     });
