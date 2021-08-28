@@ -2,7 +2,6 @@
  * Класс AccountsWidget управляет блоком
  * отображения счетов в боковой колонке
  * */
-
 class AccountsWidget {
   /**
    * Устанавливает текущий элемент в свойство element
@@ -36,7 +35,8 @@ class AccountsWidget {
           currentAccounts = Array.from(document.querySelectorAll('.account'));
           
     createAccount.onclick = () => {
-      Modal.open(App.getModal('createAccount'));
+      const modal = App.getModal('createAccount');
+      modal.open();
     }
 
     currentAccounts.forEach (() => {
@@ -57,12 +57,15 @@ class AccountsWidget {
    * */
   update() {
     let current = User.current();
+    console.log(current);
     if (current) {
-      let accounts = Account.list();
-      if (accounts) {
-        this.Widget.clear();
-        this.renderItem(accounts);
-      }
+      Account.list(current, (err, response) => {
+        console.log(response);
+        if (response && response.success === true) {
+          this.Widget.clear();
+          this.renderItem(response.data);
+        }
+      });
     }
   }
 

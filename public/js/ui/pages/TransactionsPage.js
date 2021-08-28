@@ -28,7 +28,7 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    rhis.render(this.lastOptions);
+    this.render(this.lastOptions);
   }
 
   /**
@@ -104,11 +104,16 @@ class TransactionsPage {
    * в TransactionsPage.renderTransactions()
    * */
   render(options){
-    if (options) {
-      this.lastOptions = options;
-      this.renderTitle(Account.get(options, () => {return response}));
-      this.renderTransactions(Transaction.list(options, () => {return response}));
-    }
+    // if (options) {
+    //   this.lastOptions = options;
+    //   console.log(this.lastOptions);
+    //   this.renderTitle(Account.get(options, () => (err, response) => {
+    //     console.log(response)}
+    //   ));
+    //   this.renderTransactions(Transaction.list(options, () => (err, response) => {
+    //     console.log(response)}
+    //   ));
+    // }
   }
 
   /**

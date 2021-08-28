@@ -31,11 +31,13 @@ class TransactionsWidget {
           expenseButton = document.querySelector('.create-expense-button');
     
     incomeButton.onclick = () => {
-      Modal.open(App.getModal('newIncome'));
+      const modal = App.getModal('newIncome');
+      modal.open();
     }
 
     expenseButton.onclick = () => {
-      Modal.open(App.getModal('newExpense'));
+      const modal = App.getModal('newExpense');
+      modal.open();
     }
   }
 }

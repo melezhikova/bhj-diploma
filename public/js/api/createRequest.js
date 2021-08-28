@@ -4,6 +4,7 @@
  * */
 const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest();
+    console.log(options.callback);
     xhr.responseType = 'json';
     if (options.method === 'GET') {
         const currentData = options.data;
@@ -20,8 +21,7 @@ const createRequest = (options = {}) => {
             xhr.addEventListener('readystatechange', function () {
                 if (xhr.readyState === xhr.DONE && xhr.status === 200) {
                     console.log(xhr.response);
-                    console.log(options.callback);
-                    options.callback = f => f;
+                    options.callback(null, xhr.response);
                 }
             })
         } catch (e) {
@@ -40,8 +40,7 @@ const createRequest = (options = {}) => {
             xhr.addEventListener('readystatechange', function () {
                 if (xhr.readyState === xhr.DONE && xhr.status === 200) {
                     console.log(xhr.response);
-                    console.log(options.callback);
-                    options.callback = f => f;
+                    options.callback(null, xhr.response);
                 }
             })
         } catch (e) {

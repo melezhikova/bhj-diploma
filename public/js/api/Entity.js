@@ -14,7 +14,10 @@ class Entity {
     createRequest({
       data, 
       method: 'GET',
-      callback
+      callback: (err, response) => {
+        console.log(response);
+        callback (err, response);
+      }
     })
   }
 
@@ -27,7 +30,10 @@ class Entity {
     createRequest({
       data,
       method: 'PUT',
-      callback
+      callback: (err, response) => {
+        console.log(response);
+        callback (err, response);
+      }
     })
   }
 
@@ -39,7 +45,10 @@ class Entity {
     createRequest({
       data,
       method: 'DELETE',
-      callback
+      callback: (err, response) => {
+        console.log(response);
+        callback (err, response);
+      }
     })
   }
 }
