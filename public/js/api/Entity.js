@@ -14,8 +14,8 @@ class Entity {
     createRequest({
       data, 
       method: 'GET',
+      url: this.URL,
       callback: (err, response) => {
-        console.log(response);
         callback (err, response);
       }
     })
@@ -29,9 +29,9 @@ class Entity {
   static create(data, callback) {
     createRequest({
       data,
+      url: this.URL,
       method: 'PUT',
       callback: (err, response) => {
-        console.log(response);
         callback (err, response);
       }
     })
@@ -45,8 +45,8 @@ class Entity {
     createRequest({
       data,
       method: 'DELETE',
+      url: this.URL,
       callback: (err, response) => {
-        console.log(response);
         callback (err, response);
       }
     })

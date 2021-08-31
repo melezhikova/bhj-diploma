@@ -19,8 +19,10 @@ class AccountsWidget {
       this.element = element;
     }
 
-    this.registerEvents();
     this.update();
+    this.registerEvents();
+
+    this.currentAccounts;
   }
 
   /**
@@ -31,17 +33,13 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-    const createAccount = document.querySelector('.create-account'),
-          currentAccounts = Array.from(document.querySelectorAll('.account'));
-          
+    const createAccount = document.querySelector('.create-account');
     createAccount.onclick = () => {
       const modal = App.getModal('createAccount');
       modal.open();
     }
 
-    currentAccounts.forEach (() => {
-      this.onSelectAccount();
-    })
+    //ну не шмогла здесь сделать обработчик на счета, сделала в renderItem
 
   }
 
@@ -57,12 +55,10 @@ class AccountsWidget {
    * */
   update() {
     let current = User.current();
-    console.log(current);
     if (current) {
       Account.list(current, (err, response) => {
-        console.log(response);
         if (response && response.success === true) {
-          this.Widget.clear();
+          this.clear();
           this.renderItem(response.data);
         }
       });
@@ -90,9 +86,11 @@ class AccountsWidget {
    * */
   onSelectAccount(element) {
     const selectedItem = document.querySelector('.active');
-    selectedItem.classList.remove('active');
-    element.classList.add('active');
-    const id = element.dataset.id;
+    if (selectedItem) {
+      selectedItem.classList.remove('active');
+    }
+    element.currentTarget.classList.add('active');
+    const id = element.currentTarget.dataset.id;
     App.showPage('transactions', {account_id: id})
   }
 
@@ -103,7 +101,7 @@ class AccountsWidget {
    * */
   getAccountHTML(item){
     return `
-      <li class="active account" data-id=${item.id}>
+      <li class="account" data-id=${item.id}>
         <a href="#">
           <span>${item.name}</span> /
           <span>${item.sum}</span>
@@ -119,6 +117,13 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-    this.element.innerHTML = getAccountHTML(data);
+    data.forEach((item) => {
+      this.element.insertAdjacentHTML('beforeend', this.getAccountHTML(item));
+    })
+
+    let currentAccounts = Array.from(this.element.getElementsByClassName('account'));
+    currentAccounts.forEach ((item) => {
+     item.addEventListener('click', this.onSelectAccount);
+    })
   }
 }

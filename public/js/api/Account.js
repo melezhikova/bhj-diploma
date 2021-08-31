@@ -5,16 +5,16 @@
  * */
 class Account extends Entity {
 
-  static UPL = '/account';
+  static URL = '/account';
   /**
    * Получает информацию о счёте
    * */
   static get(id, callback){
     createRequest({
-      id,
+      account_id: id,
+      url: this.URL,
       method: 'GET',
       callback: (err, response) => {
-        console.log(response);
         callback(err, response);
       }
     })

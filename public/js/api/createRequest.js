@@ -4,7 +4,6 @@
  * */
 const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest();
-    console.log(options.callback);
     xhr.responseType = 'json';
     if (options.method === 'GET') {
         const currentData = options.data;
