@@ -19,7 +19,6 @@ const createRequest = (options = {}) => {
             xhr.send();
             xhr.addEventListener('readystatechange', function () {
                 if (xhr.readyState === xhr.DONE && xhr.status === 200) {
-                    console.log(xhr.response);
                     options.callback(null, xhr.response);
                 }
             })
@@ -28,7 +27,6 @@ const createRequest = (options = {}) => {
         }
     } else {
         try {
-            console.log(options);
             let formData = new FormData();
             for (let option in options.data) {
                 let value = options.data[option];
@@ -38,7 +36,6 @@ const createRequest = (options = {}) => {
             xhr.send(formData);
             xhr.addEventListener('readystatechange', function () {
                 if (xhr.readyState === xhr.DONE && xhr.status === 200) {
-                    console.log(xhr.response);
                     options.callback(null, xhr.response);
                 }
             })

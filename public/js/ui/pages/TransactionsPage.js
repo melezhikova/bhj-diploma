@@ -58,9 +58,10 @@ class TransactionsPage {
     if (this.lastOptions.account_id) {
       let agree = confirm('Вы действительно хотите удалить счёт?');
       if (agree === true) {
-        Account.remove(this.lastOptions, (err, response) => {
-          console.log(response);
+        const id = this.lastOptions.account_id;
+        Account.remove({id}, (err, response) => {
           if (response.success === true) {
+            this.clear();
             App.updateWidgets();
           }  
         })
@@ -75,11 +76,9 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction( id ) {
-    console.log(id);
     let agree = confirm('Вы действительно хотите удалить транзакцию?');
     if (agree === true) {
       Transaction.remove(id, (err, response) => {
-        console.log(response);
         if (response.success === true) {
           App.update();
         }  
@@ -208,19 +207,7 @@ class TransactionsPage {
     let html = '';
     if (data.length > 0) {
       data.forEach((item) => {
-        let itemCode = this.getTransactionHTML(item);
-        html += `
-          <div class="content-wrapper">
-            <section class="content-header">
-              <h1>
-                <!-- ... -->
-              </h1>
-            </section>
-            <section class="content">
-              ${itemCode}
-            </section>
-          </div>
-        `
+        html += this.getTransactionHTML(item);
       })
     }
     box.innerHTML = html;
@@ -229,7 +216,7 @@ class TransactionsPage {
     transactionButtons.forEach((item) => {
       item.addEventListener ('click', () => {
         let id = item.dataset.id;
-        this.removeTransaction(id);
+        this.removeTransaction({id});
       })
     })
   }

@@ -38,7 +38,6 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(event) {
-    console.log(event);
     const element = event.currentTarget.closest('.modal');
     const modal = App.getModal(element.dataset.modalId);
     modal.close();

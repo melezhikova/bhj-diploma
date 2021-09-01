@@ -28,16 +28,21 @@ class TransactionsWidget {
    * */
   registerEvents() {
     const incomeButton = document.querySelector('.create-income-button'),
-          expenseButton = document.querySelector('.create-expense-button');
+          expenseButton = document.querySelector('.create-expense-button'),
+          title = document.querySelector('.content-title');
     
     incomeButton.onclick = () => {
       const modal = App.getModal('newIncome');
-      modal.open();
+      if (title.innerText !== "Название счёта") {
+        modal.open();
+      }
     }
 
     expenseButton.onclick = () => {
       const modal = App.getModal('newExpense');
-      modal.open();
+      if (title.innerText !== "Название счёта") {
+        modal.open();
+      }
     }
   }
 }
